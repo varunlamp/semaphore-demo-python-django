@@ -4,12 +4,11 @@ pipeline{
         tools {
             docker 'docker'
         }
-    
+    }
     stages{
-      
         
         stage("docker container"){
-            step{
+            stage{
                 sh "docker run -it -p 8732:8732 --name python:3.10-buster /bin/bash"
     }
             post{
