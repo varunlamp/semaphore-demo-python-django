@@ -1,7 +1,10 @@
 pipeline{
     agent{
         agent any
-    }
+        tools {
+            docker 'docker'
+        }
+    
     stages{
         stage("docker installation"){
             steps{
