@@ -3,7 +3,12 @@ pipeline {
     stages{
         stage("install docker"){
             steps{
-                sh 'sudo yum install docker -y'
+                sh 'sudo yum update'
+                sh'sudo yum search docker'
+                sh'sudo yum info docker'
+                sh'sudo yum install docker'
+                sh'sudo systemctl enable docker.service'
+                sh'sudo systemctl start docker.service'
             }
             post{
                 always{
