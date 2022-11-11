@@ -4,7 +4,7 @@ pipeline{
         tools {
             docker 'docker'
         }
-    }
+    
     stages{
         
         stage("docker container"){
