@@ -10,7 +10,7 @@ pipeline{
         stage("docker container"){
             stage{
                 sh "docker run -it -p 8732:8732 --name python:3.10-buster /bin/bash"
-    }
+    
             post{
                 
                 success{
@@ -25,7 +25,7 @@ pipeline{
         stage("clone"){
             steps{
                 git "https://github.com/varunlamp/semaphore-demo-python-django.git"
-            }
+            
             post{
                 
                 success{
@@ -41,7 +41,7 @@ pipeline{
 
             steps{
                 sh pip install requirement.txt
-            }
+            
             post{
                    
                     success{
@@ -56,7 +56,7 @@ pipeline{
             stage("manage"){
                 steps{
                     sh "python manage.py migrate"
-                }
+                
                 post{
                    
                     success{
@@ -71,7 +71,7 @@ pipeline{
             stage("build"){
                 steps{
                     sh "python run -it -p 0.0.0.0:8732"
-                }
+                
                 post{
                     
                     success{
