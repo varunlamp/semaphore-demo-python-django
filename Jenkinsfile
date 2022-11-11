@@ -6,21 +6,7 @@ pipeline{
         }
     
     stages{
-        stage("docker installation"){
-            steps{
-                sh "yum install docker -y"
-                sh "docker --version"
-            }
-            post{
-                
-                success{
-                    echo "========A executed successfully========"
-                }
-                failure{
-                    echo "========A execution failed========"
-                }
-            }
-        }
+      
         
         stage("docker container"){
             step{
