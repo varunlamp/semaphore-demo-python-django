@@ -56,7 +56,7 @@ pipeline{
                 }
             }
         }
-            stage("db"){
+        stage("db"){
                 steps{
                     sh "python manage.py migrate"
                 
@@ -71,6 +71,7 @@ pipeline{
             
                 }
             }
+        }
             stage("build"){
                 steps{
                     sh "python run -it -p 0.0.0.0:8732"
@@ -91,5 +92,4 @@ pipeline{
     }
 
 
-}
 }
