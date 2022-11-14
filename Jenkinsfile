@@ -42,7 +42,7 @@ pipeline{
         stage("dependency"){
 
             steps{
-                sh pip install -r requirement.txt
+                sh "pip install -r requirement.txt"
             
             post{
                    
