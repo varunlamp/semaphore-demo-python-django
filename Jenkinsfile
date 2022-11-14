@@ -9,7 +9,16 @@ pipeline{
             steps{
                 sh "docker run -it -p 8732:8732 --name python:3.10-buster "
     
-            
+            post{
+                
+                success{
+                    echo "====++++docker container executed successfully++++===="
+        }
+                failure{
+                    echo "====++++docker container execution failed++++===="
+        }
+        
+            }
         }
         }
         stage("clone"){
