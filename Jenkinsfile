@@ -8,7 +8,7 @@ pipeline{
     stages{
         
         stage("docker container"){
-            stage{
+            steps{
                 sh "docker run -it -p 8732:8732 --name python:3.10-buster /bin/bash"
     
             post{
@@ -39,10 +39,10 @@ pipeline{
             }
         }
         }
-        stage("docker DB"){
+        stage("dependency"){
 
             steps{
-                sh pip install requirement.txt
+                sh pip install -r requirement.txt
             
             post{
                    
@@ -56,7 +56,7 @@ pipeline{
                 }
             }
         }
-            stage("manage"){
+            stage("db"){
                 steps{
                     sh "python manage.py migrate"
                 
