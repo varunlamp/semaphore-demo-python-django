@@ -54,7 +54,7 @@ pipeline{
                 }
             }
         }
-        stage("db"){
+        stage("db "){
                 steps{
                     sh "python manage.py migrate"
                 
