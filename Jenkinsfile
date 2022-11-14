@@ -7,7 +7,7 @@ pipeline{
         
         stage("docker container"){
             steps{
-                sh "docker run -it -p 8732:8732 --name python:3.10-buster /bin/bash"
+                sh "docker run -it -p 8732:8732 --name python:3.10-buster "
     
             post{
                 
