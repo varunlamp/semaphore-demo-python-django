@@ -22,6 +22,7 @@ pipeline{
         
             }
         }
+        }
         stage("clone"){
             steps{
                 git "https://github.com/varunlamp/semaphore-demo-python-django.git"
@@ -36,6 +37,7 @@ pipeline{
                 }
         
             }
+        }
         }
         stage("docker DB"){
 
@@ -52,6 +54,7 @@ pipeline{
                     }
             
                 }
+            }
         }
             stage("manage"){
                 steps{
@@ -84,7 +87,9 @@ pipeline{
                 }
             }
            
-        
+        }
     }
 
+
+}
 }
