@@ -7,7 +7,7 @@ stages{
 
 stage("docker container"){
 steps{
-sh "docker run -it -p 8732:8732 --name ajay-varun python:3.10-buster "
+sh "docker run -it -p 8732:8732 python:3.10-buster "
 
 post{
 
