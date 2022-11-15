@@ -1,101 +1,94 @@
-pipeline {
-    agent any
-    stages{
-        stage("install docker"){
-            steps{
-                sh 'sudo yum update'
-                sh'sudo yum search docker'
-                sh'sudo yum info docker'
-                sh'sudo yum install docker'
-                sh'sudo systemctl enable docker.service'
-                sh'sudo systemctl start docker.service'
-            }
-            post{
-                always{
-                    sh 'systemctl status docker'
-                }
-                success{
-                    echo "====++++install docker executed successfully++++===="
-                }
-                failure{
-                    echo "====++++install docker execution failed++++===="
-                }
-        
-            }
-        }
-        stage("container"){
-            steps{
-                sh 'sudo docker run -it -p 8732:8732 python:3.10-buster /bin/bash'
-            }
-            post{
-                success{
-                    echo "====++++container executed successfully++++===="
-                }
-                failure{
-                    echo "====++++container execution failed++++===="
-                }
-        
-            }
-        }
-        stage("Clone"){
-            steps{
-                git'https://github.com/ajay9595/semaphore-demo-python-django.git'
-            }
-            post{
-                always{
-                    echo "====++++always++++===="
-                }
-                success{
-                    echo "====++++Clone executed successfully++++===="
-                }
-                failure{
-                    echo "====++++Clone execution failed++++===="
-                }
-        
-            }
-        }
-        stage("dependency setup pip"){
-            steps{
-                sh 'sudo pip install -r requirements.txt'
-            }
-            post{
-                success{
-                    echo "====++++dependency setup executed successfully++++===="
-                }
-                failure{
-                    echo "====++++dependency setup execution failed++++===="
-                }
-        
-            }
-        }
-        stage("DB"){
-            steps{
-                sh 'python manage.py makemigrations'
-                sh 'python manage.py migrate'
-            }
-            post{
-                success{
-                    echo "====++++A executed successfully++++===="
-                }
-                failure{
-                    echo "====++++A execution failed++++===="
-                }
-        
-            }
-        }
-        stage("Deploy"){
-            steps{
-                sh 'python manage.py runserver 0.0.0.0:8732'
-            }
-            post{
-                success{
-                    echo "====++++Deploy executed successfully++++===="
-                }
-                failure{
-                    echo "====++++Deploy execution failed++++===="
-                }
-        
-            }
-        }
-    }
+pipeline{
+
+agent any
+
+
+stages{
+
+stage("docker container"){
+steps{
+sh "docker run -it -p 8732:8732 --name python:3.10-buster "
+
+post{
+
+success{
+echo "====++++docker container executed successfully++++===="
 }
+failure{
+echo "====++++docker container execution failed++++===="
+}
+
+}
+}
+}
+stage("clone"){
+steps{
+git "https://github.com/varunlamp/semaphore-demo-python-django.git"
+
+post{
+
+success{
+echo "====++++clone executed successfully++++===="
+}
+failure{
+echo "====++++clone execution failed++++===="
+}
+
+}
+}
+}
+stage("dependency"){
+
+steps{
+sh "pip install -r requirement.txt"
+
+post{
+
+success{
+echo "====++++manage executed successfully++++===="
+}
+failure{
+echo "====++++manage execution failed++++===="
+}
+
+}
+}
+}
+stage("db "){
+steps{
+sh "python manage.py migrate"
+
+post{
+
+success{
+echo "====++++manage executed successfully++++===="
+}
+failure{
+echo "====++++manage execution failed++++===="
+}
+
+}
+}
+}
+stage("build"){
+steps{
+sh "python run -it -p 0.0.0.0:8732"
+
+post{
+
+success{
+echo "====++++build executed successfully++++===="
+}
+failure{
+echo "====++++build execution failed++++===="
+}
+
+}
+}
+
+}
+}
+
+
+}
+>>>>>>> Stashed changes
